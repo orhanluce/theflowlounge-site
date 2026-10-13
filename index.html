@@ -3,109 +3,318 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Çeper — AI yayılım kontrolü</title>
-<meta name="description" content="Çeper, yerel AI çalışmalarının izinsiz yayılmasını sınırlayan ve ev/ofis ağında erken uyarı veren yerel bir güvenlik aracıdır. Ölçülmüş sonuçlar ve açık sınırlarla.">
+<title>Çeper · kendini kopyalayan yapay zekâya karşı bir çeper</title>
+<meta name="description" content="Çeper, bilgisayarındaki AI programlarını kısıtlı bir alanda tutar, ev ağında kendini kopyalayan yazılımın izini arar. Ölçtüklerim de ölçmediklerim de sayfada.">
 <link rel="canonical" href="https://theflowlounge.com/">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
-<meta name="theme-color" content="#1f6f5c">
+<meta name="color-scheme" content="light dark">
+<meta name="theme-color" content="#eef1ec" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#11152a" media="(prefers-color-scheme: dark)">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="tr_TR">
 <meta property="og:site_name" content="Çeper">
 <meta property="og:url" content="https://theflowlounge.com/">
-<meta property="og:title" content="Çeper — AI yayılım kontrolü">
-<meta property="og:description" content="AI çalışmalarının izinsiz yayılmasını sınırlayan yerel kontrol aracı. Ölçülmüş sonuçlar ve açık sınırlarla.">
+<meta property="og:title" content="Çeper · kendini kopyalayan yapay zekâya karşı bir çeper">
+<meta property="og:description" content="Bilgisayarındaki AI programlarını kısıtlı bir alanda tutan, ev ağında kendini kopyalayan yazılımın izini arayan yerel araç. Ölçtüklerim de ölçmediklerim de sayfada.">
 <meta property="og:image" content="https://theflowlounge.com/og-image.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="Çeper: AI çalışmalarının izinsiz yayılmasını sınırlayan yerel kontrol aracı">
+<meta property="og:image:alt" content="Elle çizilmiş bir hücre: içinde bilgisayar, telefon ve tuzak TV kutusu, dışında ikiye bölünen bir mikrop. Yazı: kendini kopyalayan yapay zekâya karşı bir çeper.">
 <meta name="twitter:card" content="summary_large_image">
+<link rel="preload" href="/fonts/anybody-latin.woff2" as="font" type="font/woff2" crossorigin>
 <style>
-:root{--bg:#f4f6f8;--card:#fff;--ink:#14212b;--muted:#566370;--line:#dde3e8;--accent:#1f6f5c;--accent-ink:#fff;--warn:#8a5a00;--warn-bg:#fff6e0}
-@media (prefers-color-scheme:dark){:root{--bg:#0f1519;--card:#172027;--ink:#e6edf2;--muted:#9aa8b3;--line:#26333c;--accent:#4fb79c;--accent-ink:#06130f;--warn:#f0c46a;--warn-bg:#2a2210}}
+@font-face{font-family:"Anybody";src:url(/fonts/anybody-latin.woff2) format("woff2");font-weight:100 900;font-stretch:50% 150%;font-display:swap;unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:"Anybody";src:url(/fonts/anybody-latin-ext.woff2) format("woff2");font-weight:100 900;font-stretch:50% 150%;font-display:swap;unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C4,U+2113,U+2C60-2C7F,U+A720-A7FF}
+@font-face{font-family:"Caveat";src:url(/fonts/caveat-latin.woff2) format("woff2");font-weight:400 700;font-display:swap;unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:"Caveat";src:url(/fonts/caveat-latin-ext.woff2) format("woff2");font-weight:400 700;font-display:swap;unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C4,U+2113,U+2C60-2C7F,U+A720-A7FF}
+
+/* riso: kâğıt + iki mürekkep (lacivert, floresan pembe) */
+:root{
+  --paper:#eef1ec;--ink:#1c2a6e;--ink-2:#47538c;--pink:#ff4fa3;--pink-ink:#c8186f;
+  --hl:rgba(255,79,163,.36);--tint:rgba(255,79,163,.32);--grid:rgba(28,42,110,.085);--rule:rgba(28,42,110,.2);
+  --blend:multiply;--grain:.08;
+  --grain-img:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1.6 -.3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  --display:"Anybody","Bahnschrift","Arial Narrow",system-ui,sans-serif;
+  --hand:"Caveat","Ink Free","Segoe Print","Bradley Hand",cursive;
+  --mono:ui-monospace,"Cascadia Mono","SF Mono",Menlo,Consolas,"Liberation Mono",monospace;
+  --body:system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+}
+@media (prefers-color-scheme:dark){:root{
+  --paper:#11152a;--ink:#e7eaf8;--ink-2:#aeb5d8;--pink:#ff5fae;--pink-ink:#ff8cc6;
+  --hl:rgba(255,95,174,.34);--tint:rgba(255,95,174,.3);--grid:rgba(231,234,248,.07);--rule:rgba(231,234,248,.18);
+  --blend:screen;--grain:.1;
+  --grain-img:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 1.6 -.3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}}
+
 *{box-sizing:border-box}
-body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.6 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
-.wrap{max-width:1040px;margin:0 auto;padding:0 20px}
-header{padding:64px 0 40px}
-.brand{font-weight:800;letter-spacing:-.02em;font-size:15px;color:var(--accent);text-transform:lowercase}
-h1{font-size:clamp(30px,5vw,48px);line-height:1.15;margin:12px 0 16px;letter-spacing:-.02em}
-.lead{font-size:clamp(17px,2.2vw,20px);color:var(--muted);max-width:760px}
-h2{font-size:26px;margin:0 0 16px;letter-spacing:-.01em}
-section{padding:36px 0;border-top:1px solid var(--line)}
-.grid{display:grid;gap:16px;grid-template-columns:repeat(auto-fit,minmax(230px,1fr))}
-.card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:20px}
-.card h3{margin:0 0 8px;font-size:17px}
-.card p{margin:0;color:var(--muted);font-size:15px}
-table{width:100%;border-collapse:collapse;background:var(--card);border:1px solid var(--line);border-radius:12px;overflow:hidden;font-size:15px}
-th,td{text-align:left;padding:12px 14px;border-bottom:1px solid var(--line);vertical-align:top}
-th{font-size:13px;text-transform:uppercase;letter-spacing:.04em;color:var(--muted)}
-tr:last-child td{border-bottom:0}
-.table-wrap{overflow-x:auto}
-.note{background:var(--warn-bg);color:var(--warn);border-radius:12px;padding:16px 18px;font-size:15px}
-ul.limits{margin:0;padding-left:20px;color:var(--muted)}
-ul.limits li{margin:6px 0}
-.status{display:inline-block;background:var(--accent);color:var(--accent-ink);border-radius:999px;padding:4px 12px;font-size:13px;font-weight:700}
-a{color:var(--accent)}
-footer{padding:32px 0 48px;color:var(--muted);font-size:14px;border-top:1px solid var(--line)}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--paper);color:var(--ink);font:400 17px/1.62 var(--body);overflow-x:hidden}
+@media (min-width:720px){body{font-size:18px}}
+body::after{content:"";position:fixed;inset:0;z-index:50;pointer-events:none;opacity:var(--grain);mix-blend-mode:var(--blend);background-image:var(--grain-img)}
+a{color:inherit;text-decoration:underline;text-decoration-color:var(--pink);text-decoration-thickness:.14em;text-underline-offset:.2em}
+a:hover{background:var(--hl)}
+:focus-visible{outline:3px solid var(--pink-ink);outline-offset:3px;border-radius:2px}
+mark{color:inherit;background:linear-gradient(transparent 0 .34em,var(--hl) .34em calc(100% - .1em),transparent 0);padding:0 .1em;-webkit-box-decoration-break:clone;box-decoration-break:clone}
+.wrap{max-width:1180px;margin:0 auto;padding:0 clamp(16px,4vw,40px)}
+
+/* üst şerit */
+.mast{display:flex;flex-wrap:wrap;justify-content:space-between;gap:4px 18px;padding:14px 0 11px;border-bottom:2px solid var(--ink);font:500 12.5px/1.4 var(--mono);letter-spacing:.02em}
+
+/* giriş */
+.hero{display:grid;gap:clamp(28px,4vw,48px);align-items:center;padding:clamp(30px,5vw,68px) 0 clamp(48px,7vw,96px)}
+@media (min-width:920px){.hero{grid-template-columns:minmax(0,5fr) minmax(0,6fr)}}
+/* başlık boyu sütundan gelir: en uzun kelime ("kopyalayan", 110% genişlikte ~6.8em) her ekranda sığar */
+.hero-text{min-width:0;container-type:inline-size}
+h1{font:800 clamp(34px,5.2vw,84px)/.95 var(--display);font-stretch:110%;letter-spacing:-.025em;margin:0 0 .4em;text-shadow:.05em .04em 0 var(--pink)}
+@supports (font-size:1cqi){h1{font-size:clamp(34px,14.2cqi,96px)}}
+h1 .dar{font-weight:900;font-stretch:70%;letter-spacing:-.005em}
+.lead{font-size:clamp(18px,1.55vw,21px);max-width:31em;margin:0 0 1.3em}
+.jumps{display:flex;flex-wrap:wrap;gap:8px 24px;margin:0;font:600 15px var(--mono)}
+
+/* şekil */
+.fig{position:relative;margin:0}
+.sheet{border:1.5px solid var(--ink);padding:clamp(6px,1.4vw,14px);transform:rotate(-.6deg);background-color:var(--paper);background-image:linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px);background-size:22px 22px}
+.stamp{position:absolute;z-index:2;top:-16px;left:-8px;transform:rotate(-9deg);font:800 14px/1.05 var(--display);font-stretch:82%;letter-spacing:.07em;text-transform:uppercase;color:var(--pink-ink);border:3px solid currentColor;border-radius:6px;padding:7px 10px 6px;background:var(--paper)}
+.fig figcaption{margin:14px 0 0;max-width:44em;font:500 13.5px/1.5 var(--mono);color:var(--ink-2)}
+.fig figcaption b{color:var(--ink)}
+.cell{display:block;width:100%;height:auto;overflow:visible}
+.cell .ink{fill:none;stroke:var(--ink);stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
+.cell .ring{fill:var(--tint);fill-rule:evenodd;mix-blend-mode:var(--blend)}
+.cell .fillpk{fill:var(--pink);mix-blend-mode:var(--blend)}
+.cell .alert{stroke:var(--pink-ink);stroke-width:3.2}
+.cell .eye{fill:var(--ink)}
+.cell .led{fill:var(--pink-ink)}
+.cell text{stroke:none;fill:var(--ink)}
+.cell .t-mono{font:600 13px var(--mono)}
+.cell .t-hand{font:600 26px var(--hand);fill:var(--pink-ink)}
+.cell .arrow{fill:none;stroke:var(--pink-ink);stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
+.cell .num circle{fill:var(--paper);stroke:var(--pink-ink);stroke-width:2.4}
+.cell .num text{font:700 24px var(--hand);fill:var(--pink-ink);text-anchor:middle;dominant-baseline:central}
+.cell .ants{fill:none;stroke:var(--pink-ink);stroke-width:3.2;stroke-linecap:round;stroke-dasharray:1 9;animation:ants 1.5s linear infinite}
+.cell .germ{transform-box:fill-box;transform-origin:center;animation:wob 3.4s ease-in-out infinite alternate}
+@keyframes ants{to{stroke-dashoffset:-20}}
+@keyframes wob{from{transform:rotate(-6deg)}to{transform:rotate(5deg)}}
+
+/* bölümler */
+.sec{border-top:2px solid var(--ink);padding:clamp(52px,8vw,104px) 0}
+h2{font:800 clamp(34px,4.8vw,60px)/1 var(--display);font-stretch:70%;letter-spacing:-.01em;margin:0 0 .6em}
+.split{display:grid;gap:4px clamp(28px,5vw,64px)}
+@media (min-width:920px){.split{grid-template-columns:minmax(0,4fr) minmax(0,7fr)}}
+.split p{margin:0 0 1em;max-width:36em}
+.src{font:500 14px/1.55 var(--mono);color:var(--ink-2)}
+
+.parts ol{list-style:none;margin:0;padding:0;columns:2 340px;column-gap:clamp(28px,5vw,64px)}
+.parts li{break-inside:avoid;display:grid;grid-template-columns:42px minmax(0,1fr);gap:0 16px;margin:0 0 34px}
+.parts .n{grid-row:span 2;width:40px;height:40px;display:grid;place-items:center;border:2.4px solid var(--pink-ink);border-radius:52% 46% 50% 44%/48% 54% 44% 52%;font:700 24px/1 var(--hand);color:var(--pink-ink)}
+.parts h3{font:750 25px/1.1 var(--display);font-stretch:86%;margin:5px 0 6px}
+.parts p{margin:0}
+
+.sub{margin:-.4em 0 1.8em;font:500 14px/1.5 var(--mono);color:var(--ink-2)}
+.book{border-left:2px solid var(--pink);padding-left:clamp(12px,3vw,30px)}
+table{width:100%;border-collapse:collapse}
+th{padding:0 16px 10px 0;border-bottom:2px solid var(--ink);text-align:left;font:700 12.5px/1.3 var(--mono);letter-spacing:.06em;text-transform:uppercase;color:var(--ink-2)}
+td{padding:14px 16px 14px 0;border-bottom:1px solid var(--rule);vertical-align:top}
+td.ne{font-weight:650}
+td.dosya{font:500 13px/1.5 var(--mono);color:var(--ink-2);white-space:nowrap}
+.hand{font:600 24px/1.1 var(--hand);color:var(--pink-ink)}
+td .hand{display:inline-block;margin-left:.3em;transform:rotate(-2deg)}
+.foot-note{margin:16px 0 0;font:500 13px/1.5 var(--mono);color:var(--ink-2)}
+@media (max-width:760px){
+  thead{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%)}
+  table,tbody,tr,td{display:block}
+  tr{padding:14px 0;border-bottom:1px solid var(--rule)}
+  td{border:0;padding:2px 0}
+  td.dosya{white-space:normal}
+}
+
+.limits ul{list-style:none;margin:0;padding:0;max-width:40em}
+.limits li{position:relative;padding:11px 0 11px 40px;border-bottom:1px dashed var(--rule)}
+.limits li::before{content:"";position:absolute;left:4px;top:16px;width:20px;height:20px;background:var(--pink-ink);-webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3E%3Cpath d='M3 4c5 4 9 8 14 13M16 3C11 8 7 12 3 17' fill='none' stroke='%23000' stroke-width='3' stroke-linecap='round'/%3E%3C/svg%3E") center/contain no-repeat;mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3E%3Cpath d='M3 4c5 4 9 8 14 13M16 3C11 8 7 12 3 17' fill='none' stroke='%23000' stroke-width='3' stroke-linecap='round'/%3E%3C/svg%3E") center/contain no-repeat}
+.limits .hand{display:block;margin:.2em 0 0;font-size:30px;transform:rotate(-3deg);transform-origin:left}
+
+footer{border-top:2px solid var(--ink);padding:28px 0 56px;font:500 13px/1.6 var(--mono);color:var(--ink-2)}
+footer p{margin:0 0 .6em;max-width:72em}
+
+@media (prefers-reduced-motion:reduce){.cell .ants,.cell .germ{animation:none}}
 </style>
 </head>
 <body>
 <div class="wrap">
-<header>
-  <div class="brand">çeper</div>
-  <h1>AI çalışmalarının izinsiz yayılmasını sınırlayan yerel kontrol aracı</h1>
-  <p class="lead">Çeper, bilgisayarda çalışan AI programlarını sınırlar, ev ya da ofis ağında kendini kopyalayan yazılımların izlerini erken görür ve müdahaleyi insan onayına bağlar. Her iddia ölçülmüş bir sonuca dayanır; ölçülmeyen her şey açıkça yazılıdır.</p>
-  <p><span class="status">Geliştirme sürümü 1.3 — kamuya açık indirme yok</span></p>
+
+<header class="mast">
+  <span><b>çeper</b> 1.3.3</span>
+  <span>Windows'ta yerel çalışır</span>
+  <span>kamuya açık indirme yok</span>
+  <span>theflowlounge.com</span>
 </header>
 
-<section>
-  <h2>Neden</h2>
-  <p>Anthropic, 12 Ekim 2026'da yayımladığı araştırmada küçük AI modellerinin ucuz ve zayıf korunan cihazlara (ör. markasız Android TV kutuları) yayılıp kendini kopyalayabilmesinin “aylar uzakta olabileceğini” yazdı. Deneylerde giriş yolu kimlik doğrulamasız hata ayıklama portuydu (ADB); yayılım yavaştı ve ağda iz bırakıyordu. Araştırmanın önerdiği savunmalar ağ seviyesinde: trafikte anomali, tuzak cihazlar, karantina ve güvenli varsayılanlar. Çeper bu önerileri tek bir yerel araçta uygular. Kaynak: <a href="https://www.anthropic.com/research/self-replicating-ai" rel="noopener">Anthropic Frontier Red Team</a>.</p>
+<main>
+<section class="hero">
+  <div class="hero-text">
+    <h1>kendini kopyalayan <span class="dar">yapay zekâya</span> karşı bir çeper.</h1>
+    <p class="lead">Çeper, bilgisayarında çalışan AI programlarını kısıtlı bir alanda tutar. Ev ağında kendini kopyalayan yazılımın izini arar, müdahale kararını da sana bırakır. Ölçtüğüm her şeyi aşağıya yazdım, ölçemediklerimi de.</p>
+    <p class="jumps"><a href="#olcum">ne ölçtüm ↓</a> <a href="#eksik">ne eksik ↓</a></p>
+  </div>
+
+  <figure class="fig">
+    <div class="stamp" aria-hidden="true">indirme yok<br>henüz</div>
+    <div class="sheet">
+      <svg class="cell" viewBox="0 0 640 540" role="img" aria-labelledby="f1t f1d">
+        <title id="f1t">Şekil 1. Bir evin çeperi</title>
+        <desc id="f1d">Elle çizilmiş bir hücre gibi duran ev ağı. Çift çizgili duvarın içinde bir dizüstü bilgisayar ve ekranında Low düzeyde çalışan bir AI programı, altında bir süreç grubu, bir telefon, tuzak olarak duran bir TV kutusu ve imzalı bir kayıt var. Duvarın dışında ikiye bölünen bir mikrop, noktalı bir yolla TV kutusuna gidiyor; duvarın üstündeki bir algılayıcı bunu fark ediyor.</desc>
+        <defs><path id="rcp" d="M0 0H12M12 0l7-6M12 0l7 6"/></defs>
+
+        <!-- pembe kalıp, hafif kaymış -->
+        <g transform="translate(4 3)">
+          <path class="ring" d="M535.8 285.0C537.4 314.1 524.3 348.3 506.9 374.4C489.5 400.5 461.5 426.7 431.4 441.8C401.4 456.9 361.9 462.0 326.6 465.1C291.2 468.1 254.2 468.0 219.4 460.1C184.6 452.3 144.8 438.9 117.8 418.0C90.7 397.0 65.3 364.3 57.1 334.3C48.9 304.3 58.5 268.4 68.6 238.0C78.7 207.7 93.3 174.8 117.8 152.1C142.3 129.4 180.4 112.9 215.7 101.9C250.9 90.9 294.0 81.1 329.3 86.3C364.6 91.4 399.7 113.7 427.8 132.6C455.8 151.5 479.4 174.3 497.4 199.7C515.4 225.1 534.3 255.9 535.8 285.0Z M521.0 285.0C522.4 311.9 510.1 343.4 493.8 367.6C477.5 391.7 451.3 415.8 423.1 429.8C395.0 443.8 358.0 448.5 324.9 451.3C291.8 454.1 257.0 454.0 224.4 446.7C191.8 439.5 154.6 427.2 129.2 407.8C103.9 388.4 80.1 358.2 72.4 330.5C64.8 302.8 73.7 269.7 83.2 241.6C92.7 213.6 106.3 183.2 129.3 162.3C152.3 141.3 188.0 126.1 221.0 115.9C254.0 105.8 294.3 96.7 327.5 101.5C360.6 106.2 393.4 126.8 419.7 144.2C446.0 161.7 468.1 182.7 485.0 206.2C501.9 229.7 519.5 258.1 521.0 285.0Z"/>
+          <g transform="translate(572 62)"><g class="germ">
+            <path class="fillpk" d="M28.3 0.0C28.6 5.9 28.1 13.9 24.3 18.4C20.5 22.8 11.8 25.6 5.2 26.5C-1.4 27.4 -10.0 26.8 -15.3 23.8C-20.6 20.8 -24.3 14.3 -26.6 8.7C-28.9 3.2 -30.9 -3.8 -29.2 -9.6C-27.5 -15.3 -22.2 -22.7 -16.4 -25.6C-10.7 -28.5 -1.2 -28.5 5.3 -27.0C11.7 -25.5 18.4 -21.3 22.2 -16.8C26.0 -12.3 27.9 -5.9 28.3 0.0Z"/>
+            <path class="fillpk" transform="translate(36 26)" d="M26.0 0.0C26.1 5.0 23.6 11.5 20.0 15.4C16.4 19.4 9.9 22.9 4.5 23.6C-0.8 24.2 -7.3 21.9 -12.1 19.3C-17.0 16.7 -22.5 12.9 -24.6 8.2C-26.8 3.6 -26.7 -3.2 -24.9 -8.3C-23.1 -13.4 -18.8 -20.2 -14.0 -22.3C-9.2 -24.5 -1.5 -22.5 4.1 -21.2C9.6 -20.0 15.5 -18.3 19.2 -14.8C22.8 -11.3 25.9 -5.0 26.0 0.0Z"/>
+          </g></g>
+        </g>
+
+        <!-- lacivert kalıp -->
+        <g class="ink">
+          <path stroke-width="3.2" d="M535.8 285.0C537.4 314.1 524.3 348.3 506.9 374.4C489.5 400.5 461.5 426.7 431.4 441.8C401.4 456.9 361.9 462.0 326.6 465.1C291.2 468.1 254.2 468.0 219.4 460.1C184.6 452.3 144.8 438.9 117.8 418.0C90.7 397.0 65.3 364.3 57.1 334.3C48.9 304.3 58.5 268.4 68.6 238.0C78.7 207.7 93.3 174.8 117.8 152.1C142.3 129.4 180.4 112.9 215.7 101.9C250.9 90.9 294.0 81.1 329.3 86.3C364.6 91.4 399.7 113.7 427.8 132.6C455.8 151.5 479.4 174.3 497.4 199.7C515.4 225.1 534.3 255.9 535.8 285.0Z"/>
+          <path stroke-width="1.5" d="M521.0 285.0C522.4 311.9 510.1 343.4 493.8 367.6C477.5 391.7 451.3 415.8 423.1 429.8C395.0 443.8 358.0 448.5 324.9 451.3C291.8 454.1 257.0 454.0 224.4 446.7C191.8 439.5 154.6 427.2 129.2 407.8C103.9 388.4 80.1 358.2 72.4 330.5C64.8 302.8 73.7 269.7 83.2 241.6C92.7 213.6 106.3 183.2 129.3 162.3C152.3 141.3 188.0 126.1 221.0 115.9C254.0 105.8 294.3 96.7 327.5 101.5C360.6 106.2 393.4 126.8 419.7 144.2C446.0 161.7 468.1 182.7 485.0 206.2C501.9 229.7 519.5 258.1 521.0 285.0Z"/>
+          <!-- algılayıcılar -->
+          <use href="#rcp" transform="translate(535.8 285) rotate(0)"/>
+          <use href="#rcp" transform="translate(431.4 441.8) rotate(60.4)"/>
+          <use href="#rcp" transform="translate(219.4 460.1) rotate(107.3)"/>
+          <use href="#rcp" transform="translate(57.1 334.3) rotate(163.3)"/>
+          <use href="#rcp" transform="translate(215.7 101.9) rotate(-107.3)"/>
+          <use href="#rcp" transform="translate(427.8 132.6) rotate(-60.4)"/>
+          <use href="#rcp" class="alert" transform="translate(497.4 199.7) rotate(-32.6)"/>
+          <!-- dizüstü + Low kutusu -->
+          <path d="M151 201L263 199L265 271L149 273Z"/>
+          <path d="M137 275L277 273L267 288L146 289Z"/>
+          <rect x="168" y="214" width="78" height="44" rx="4" stroke-dasharray="5 4" stroke-width="1.8"/>
+          <!-- süreç grubu -->
+          <rect x="150" y="306" width="114" height="72" rx="14" stroke-dasharray="6 5" stroke-width="1.8"/>
+          <circle cx="207" cy="327" r="7"/><circle cx="181" cy="359" r="7"/><circle cx="233" cy="359" r="7"/>
+          <path d="M202 333L186 353M212 333L228 353"/>
+          <!-- telefon + kilit -->
+          <g transform="rotate(-6 322 329)">
+            <rect x="302" y="292" width="40" height="74" rx="8"/>
+            <path d="M315 300H329"/>
+            <rect x="313" y="333" width="18" height="15" rx="2"/>
+            <path d="M316 333V327A6 6 0 0 1 328 327V333"/>
+          </g>
+          <!-- TV kutusu (tuzak) -->
+          <path d="M373 215L451 213L452 244L372 245Z"/>
+          <path d="M391 214L379 192M433 213L446 191"/>
+          <!-- imzalı kayıt -->
+          <path d="M393 333L452 338L447 409L388 404Z"/>
+          <path d="M383 338L441 338L441 410L383 410Z" fill="var(--paper)"/>
+          <path d="M393 354H431M393 366H427M393 378H433M393 390H418"/>
+          <ellipse cx="444" cy="414" rx="9" ry="5.5" transform="rotate(-30 444 414)"/>
+          <ellipse cx="455" cy="407" rx="9" ry="5.5" transform="rotate(-30 455 407)"/>
+          <!-- mikrop çizgisi -->
+          <g transform="translate(572 62)"><g class="germ">
+            <path d="M28.3 0.0C28.6 5.9 28.1 13.9 24.3 18.4C20.5 22.8 11.8 25.6 5.2 26.5C-1.4 27.4 -10.0 26.8 -15.3 23.8C-20.6 20.8 -24.3 14.3 -26.6 8.7C-28.9 3.2 -30.9 -3.8 -29.2 -9.6C-27.5 -15.3 -22.2 -22.7 -16.4 -25.6C-10.7 -28.5 -1.2 -28.5 5.3 -27.0C11.7 -25.5 18.4 -21.3 22.2 -16.8C26.0 -12.3 27.9 -5.9 28.3 0.0Z"/>
+            <path transform="translate(36 26)" d="M26.0 0.0C26.1 5.0 23.6 11.5 20.0 15.4C16.4 19.4 9.9 22.9 4.5 23.6C-0.8 24.2 -7.3 21.9 -12.1 19.3C-17.0 16.7 -22.5 12.9 -24.6 8.2C-26.8 3.6 -26.7 -3.2 -24.9 -8.3C-23.1 -13.4 -18.8 -20.2 -14.0 -22.3C-9.2 -24.5 -1.5 -22.5 4.1 -21.2C9.6 -20.0 15.5 -18.3 19.2 -14.8C22.8 -11.3 25.9 -5.0 26.0 0.0Z"/>
+            <circle class="eye" cx="-9" cy="-5" r="3"/><circle class="eye" cx="7" cy="-5" r="3"/>
+            <path d="M-7 7Q-1 12 6 7" stroke-width="1.8"/>
+            <circle class="eye" cx="31" cy="21" r="2.6"/><circle class="eye" cx="44" cy="21" r="2.6"/>
+          </g></g>
+        </g>
+
+        <circle class="led" cx="440" cy="229" r="3"/>
+        <text class="t-mono" x="207" y="241" text-anchor="middle">AI · Low</text>
+        <text class="t-mono" x="412" y="266" text-anchor="middle">adb :5555</text>
+
+        <!-- noktalı yol: mikroptan yeme -->
+        <path class="ants" d="M582 112C560 150 520 178 452 213"/>
+
+        <!-- el yazısı notlar -->
+        <text class="t-hand" x="300" y="44">kendini kopyalayan şey</text>
+        <path class="arrow" d="M512 48C528 50 536 54 541 60M541 60L531 59M541 60L538 51"/>
+        <text class="t-hand" x="312" y="237">yem</text>
+        <path class="arrow" d="M350 229H367M367 229L360 224M367 229L360 234"/>
+        <text class="t-hand" x="16" y="522">çeper (evet, biyolojideki)</text>
+        <path class="arrow" d="M44 497C50 466 60 430 76 398M76 398L68 405M76 398L78 408"/>
+
+        <!-- numaralar -->
+        <g class="num" transform="translate(128 196)"><circle r="15"/><text>1</text></g>
+        <g class="num" transform="translate(128 318)"><circle r="15"/><text>2</text></g>
+        <g class="num" transform="translate(560 222)"><circle r="15"/><text>3</text></g>
+        <g class="num" transform="translate(478 232)"><circle r="15"/><text>4</text></g>
+        <g class="num" transform="translate(286 292)"><circle r="15"/><text>5</text></g>
+        <g class="num" transform="translate(364 330)"><circle r="15"/><text>6</text></g>
+      </svg>
+    </div>
+    <figcaption><b>Şekil 1.</b> Bir evin çeperi. Ölçeksiz ve temsilîdir; numaralar aşağıdaki listeyle eşleşir.</figcaption>
+  </figure>
 </section>
 
-<section>
-  <h2>Ne yapar</h2>
-  <div class="grid">
-    <div class="card"><h3>Yalıtılmış çalıştırma</h3><p>AI programları Windows'un düşük bütünlük düzeyinde başlar: Çeper'in anahtarlarını okuyamaz, kayıtlarını değiştiremez, Çeper'i kapatamaz.</p></div>
-    <div class="card"><h3>Süreç ve kaynak sınırı</h3><p>Her çalışma bir süreç grubunda tutulur; süreç sayısı, bellek ve süre sınırlanır, durdurma işletim sistemi ölçümüyle doğrulanır.</p></div>
-    <div class="card"><h3>Ağ erken uyarısı</h3><p>Ağ kayıtlarında açık ADB taraması, cihazlar arası büyük aktarım, uzun bağlantı ve “erişim → yayılım” zinciri aranır.</p></div>
-    <div class="card"><h3>Tuzak cihaz</h3><p>Ağda açık ADB'li bir TV kutusu gibi görünür; bağlananın komutlarını kaydeder, hiçbir komutu çalıştırmaz, dosya içeriği saklamaz.</p></div>
-    <div class="card"><h3>İnsan onaylı karantina</h3><p>Android'de yerel VPN ile, ev ağında Linux geçidiyle süreli izolasyon. Otomatik müdahale yok.</p></div>
-    <div class="card"><h3>İmzalı kanıt</h3><p>Uyarılar, müdahaleler ve sonuçlar kurcalamaya karşı zincirlenmiş, imzalı bir kayıtta tutulur.</p></div>
+<section class="sec split">
+  <h2>neden şimdi?</h2>
+  <div>
+    <p>12 Ekim 2026'da Anthropic'in Frontier Red Team'i bir araştırma yayımladı. Küçük AI modellerinin ucuz ve kötü korunan cihazlarda kendini kopyalayabilmesine <mark>aylar kalmış olabilir</mark> diyorlar. Denemede 15 markasız Android TV kutusunu (tanesi yaklaşık 55 dolar) birbirine bağlayıp 26 milyar parametrelik bir modeli üzerlerinde çalıştırmışlar; saniyede 0,39 token.</p>
+    <p>Yayılma denemesinde içeri girilen kapı, kimlik sormayan hata ayıklama portu, yani ADB idi. Böyle bir yayılım yavaş olabilir ve ağda iz bırakır. Araştırmanın önerdiği savunmalar da zaten ağ tarafında: trafikteki tuhaflığı izlemek, tuzak cihaz koymak, haber vererek karantinaya almak. Çeper bunları bir evin ölçeğinde deniyor.</p>
+    <p class="src">Kaynak: <a href="https://www.anthropic.com/research/self-replicating-ai" rel="noopener">Anthropic, “AI models may be capable of self-replicating without access to a datacenter”</a>, 12 Ekim 2026.</p>
   </div>
 </section>
 
-<section>
-  <h2>Ölçülmüş sonuçlar</h2>
-  <div class="table-wrap"><table>
-    <thead><tr><th>Ne sınandı</th><th>Sonuç</th></tr></thead>
-    <tbody>
-      <tr><td>Uygulama ve güvenlik testleri</td><td>103 testin tamamı geçti</td></tr>
-      <tr><td>Yalıtılmış programın anahtar okuma, kayıt yazma, Çeper'i kapatma ve sistem aracılarıyla (WMI, Görev Zamanlayıcı) kaçma denemeleri</td><td>Hepsi reddedildi</td></tr>
-      <tr><td>Yerel model sunucusu (Ollama) yalıtılmış düzeyde</td><td>Çalıştı, yanıt üretti; model deposuna yazamadı</td></tr>
-      <tr><td>Sentetik yayılım zinciri ve meşru trafik (video, güncelleme, yedekleme)</td><td>Zincir bulundu; meşru trafikte 0 uyarı</td></tr>
-      <tr><td>Gerçek IoT trafiği (IoT-23 veri seti, 1 826 bağlantı, yaklaşık 1 gün)</td><td>0 yanlış alarm — küçük örneklem</td></tr>
-      <tr><td>Tuzağa gerçek ADB istemcisi ve 20 000 bozuk bağlantı</td><td>Doğru kayıt; çökme veya takılma yok</td></tr>
-      <tr><td>Android telefonda izolasyon (mobil veri, ağ değişimi, çökme)</td><td>Trafik engellendi; çökmede sızıntı olmadı (her zaman açık VPN ile)</td></tr>
-    </tbody>
-  </table></div>
+<section class="sec parts" id="parcalar">
+  <h2>şekil 1, parça parça</h2>
+  <ol>
+    <li><span class="n" aria-hidden="true">1</span><h3>kısıtlı alan</h3><p>AI programın Windows'un düşük bütünlük (Low) düzeyinde başlar. Bu düzeyden Çeper'in anahtarları okunamıyor, kayıtlarına yazılamıyor, Çeper kapatılamıyor. Ollama'yı da böyle çalıştırdım: model okudu, cevap verdi ama model klasörüne yazamadı.</p></li>
+    <li><span class="n" aria-hidden="true">2</span><h3>süreç grubu</h3><p>Her çalışma bir Windows süreç grubunda (Job Object) durur. Süreç sayısına, belleğe ve süreye sınır koyarsın. Durdur dediğinde iş gerçekten bitti mi, Çeper bunu işletim sisteminin kaydından kontrol ediyor.</p></li>
+    <li><span class="n" aria-hidden="true">3</span><h3>ağ erken uyarısı</h3><p>Ağ kayıtlarında (Zeek) izlediğin cihazlar için ADB taramasına, 500 MB'ı aşan aktarıma, 10 dakikadan uzun cihazdan cihaza bağlantıya, model sunucusu portlarına ve önce erişim sonra yayılım zincirine bakar. Uyarı bir şüphedir, kanıt değil.</p></li>
+    <li><span class="n" aria-hidden="true">4</span><h3>tuzak kutu</h3><p>Ağda ADB'si açık unutulmuş bir TV kutusu gibi görünür. Bağlanan ne yazarsa kaydeder. Hiçbir komutu çalıştırmaz, gelen dosyanın içeriğini de saklamaz.</p></li>
+    <li><span class="n" aria-hidden="true">5</span><h3>karantina, onayınla</h3><p>Telefonda yerel VPN ile izolasyon, ev ağında ise süresi dolunca kendiliğinden kalkan bir Linux geçidi engeli. Çeper kimsenin bağlantısını kendiliğinden kesmez; düğmeye sen basarsın.</p></li>
+    <li><span class="n" aria-hidden="true">6</span><h3>imzalı kayıt</h3><p>Uyarılar, müdahaleler ve sonuçları zincirleme bir kayda yazılır. Sonradan bir satır değişirse zincir kopar, bu da görünür. Dışa aktardığında imzalı bir kanıt paketi çıkar.</p></li>
+  </ol>
 </section>
 
-<section>
-  <h2>Sınırlar</h2>
-  <div class="note">Çeper tam bir sanal alan veya antivirüs değildir ve bütün interneti korumaz. Aşağıdakiler henüz yapılmadı ya da ölçülmedi.</div>
-  <ul class="limits">
-    <li>Bağımsız insan güvenlik denetimi yapılmadı; incelemeler AI tarafından yapıldı.</li>
-    <li>Gerçek bir saldırgan veya kendini kopyalayan AI ile karşılaşma yaşanmadı; sonuçlar kontrollü denemelerden gelir.</li>
-    <li>Gerçek ev ağı trafiğinde yanlış alarm oranı henüz ölçülmedi.</li>
-    <li>Yalıtılmış program kullanıcının diğer dosyalarını okuyabilir ve internete çıkabilir.</li>
-    <li>Telefonda IPv6 engeli ölçülemedi; sınanan ağlar IPv6 sağlamıyordu.</li>
-    <li>Ağ uyarıları birer sinyaldir; tek başına saldırı ya da AI kanıtı değildir.</li>
+<section class="sec log" id="olcum">
+  <h2>tablo 1: ölçtüklerim</h2>
+  <p class="sub">Hepsi 13 Ekim 2026'da, kendi Windows 11 bilgisayarımda ve bir Samsung telefonda yapıldı.</p>
+  <div class="book">
+    <table>
+      <thead><tr><th scope="col">ne denedim</th><th scope="col">ne oldu</th><th scope="col">kayıt dosyası</th></tr></thead>
+      <tbody>
+        <tr><td>Uygulama ve güvenlik testleri</td><td class="ne">103 testin 103'ü geçti</td><td class="dosya">tests-1.3.xml</td></tr>
+        <tr><td>Low düzeyden anahtarları ve veritabanını okuma, veri klasörüne yazma, Çeper'i ve başlatıcısını kapatma, WMI ile grup dışında süreç açma</td><td class="ne">6 denemenin 6'sı da reddedildi</td><td class="dosya">low-integrity.json</td></tr>
+        <tr><td>Low düzeyden Görev Zamanlayıcı'ya görev kaydetme</td><td class="ne">Reddedildi, geride görev kalmadı</td><td class="dosya">low-task-register.json</td></tr>
+        <tr><td>Ollama 0.35.1'i Low düzeyde çalıştırma</td><td class="ne">Açıldı, cevap üretti, model klasörüne yazamadı</td><td class="dosya">ollama-low-integrity.json</td></tr>
+        <tr><td>Elle kurulmuş bir yayılım zinciri ve 4 meşru akış (video, güncelleme, yedekleme, DNS)</td><td class="ne">Zincirin 6 sinyalinin hepsi yakalandı; meşru akışlarda 0 uyarı</td><td class="dosya">benchmark.json</td></tr>
+        <tr><td>IoT-23 veri setinden gerçek, zararsız IoT trafiği: 1 826 bağlantı, iki kayıt, toplam yaklaşık 27 saat</td><td class="ne">0 yanlış alarm <span class="hand">örneklem küçük, biliyorum</span></td><td class="dosya">iot23-benign-olcum.json</td></tr>
+        <tr><td>Google'ın gerçek adb istemcisiyle tuzağa bağlanma (yerel döngüde)</td><td class="ne">İstemci gerçek cihaz sandı, dosya gönderdi; hiçbir komut çalışmadı</td><td class="dosya">decoy-adb-client.json</td></tr>
+        <tr><td>Tuzağa 20 000 bozuk bağlantı denemesi</td><td class="ne">11 014'ü tuzağa ulaştı. Çökme ya da takılma yok, bellek 32 MB arttı</td><td class="dosya">decoy-fuzz.json</td></tr>
+        <tr><td>Samsung telefon, Android 15: mobil veri, Wi-Fi'a geçiş, yerel ağ; “her zaman açık VPN” ve “VPN'siz bağlantıları engelle” açıkken zorla kapatma</td><td class="ne">IPv4 trafiği kesildi; zorla kapatmada sızıntı olmadı</td><td class="dosya">android-device-1.3.json</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="foot-note">Kayıt dosyaları Çeper'in kendi deposunda duruyor; depo şimdilik herkese açık değil.</p>
+</section>
+
+<section class="sec split limits" id="eksik">
+  <div>
+    <h2>henüz değil</h2>
+    <p class="hand">bu liste kapandıkça kısalacak.</p>
+  </div>
+  <ul>
+    <li>Bağımsız bir insan güvenlik denetimi yapılmadı; incelemeleri AI yaptı.</li>
+    <li>Gerçek bir saldırganla ya da kendini kopyalayan bir AI ile karşılaşmadı. Bütün sonuçlar kontrollü denemelerden geliyor.</li>
+    <li>Gerçek bir ev ağında yanlış alarm oranını henüz ölçmedim.</li>
+    <li>Kısıtlı alandaki program senin diğer dosyalarını okuyabilir ve internete çıkabilir.</li>
+    <li>Çeper'in anahtarları yalnız kısıtlı alandaki programlara kapalı. Aynı kullanıcı hesabında Çeper dışında çalışan bir program onları okuyabilir.</li>
+    <li>Tuzağa ev ağındaki başka bir cihazdan bağlanmayı henüz denemedim; adb denemesi aynı bilgisayarın içindeydi.</li>
+    <li>Ev ağı geçidi yalnız laboratuvarda denendi, gerçek bir modemin arkasına kurulmadı.</li>
+    <li>Telefonda IPv6 engelini ölçemedim; denediğim ağlarda IPv6 yoktu.</li>
+    <li>Ağ uyarısı bir sinyaldir. Tek başına saldırı ya da AI kanıtı sayılmaz.</li>
+    <li>Antivirüs yerine geçmez ve bütün interneti korumaz.</li>
   </ul>
 </section>
+</main>
 
 <footer>
-  <p>Çeper — theflowlounge.com · 2026. Bu sayfa bir ürün tanıtımıdır; güvenlik sertifikası değildir. Anthropic ile bir bağlantısı yoktur; araştırmaya yalnız kaynak olarak atıf yapılmıştır.</p>
+  <p>Bu sayfa bir ürün tanıtımıdır, güvenlik sertifikası yerine geçmez. Anthropic'le bir bağı yok, araştırmaları yalnız kaynak olarak anılıyor. Sayfada çerez ya da sayaç yok, dış sunucuya istek gitmez.</p>
+  <p>Son güncelleme 13 Ekim 2026 · Çeper 1.3.3 · yazı tipleri Anybody ve Caveat (SIL Open Font License) · theflowlounge.com</p>
 </footer>
+
 </div>
 </body>
 </html>
