@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Çeper — AI yayılım kontrolü</title>
+<meta name="description" content="Çeper, yerel AI çalışmalarının izinsiz yayılmasını sınırlayan ve ev/ofis ağında erken uyarı veren yerel bir güvenlik aracıdır. Ölçülmüş sonuçlar ve açık sınırlarla.">
+<style>
+:root{--bg:#f4f6f8;--card:#fff;--ink:#14212b;--muted:#566370;--line:#dde3e8;--accent:#1f6f5c;--accent-ink:#fff;--warn:#8a5a00;--warn-bg:#fff6e0}
+@media (prefers-color-scheme:dark){:root{--bg:#0f1519;--card:#172027;--ink:#e6edf2;--muted:#9aa8b3;--line:#26333c;--accent:#4fb79c;--accent-ink:#06130f;--warn:#f0c46a;--warn-bg:#2a2210}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.6 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+.wrap{max-width:1040px;margin:0 auto;padding:0 20px}
+header{padding:64px 0 40px}
+.brand{font-weight:800;letter-spacing:-.02em;font-size:15px;color:var(--accent);text-transform:lowercase}
+h1{font-size:clamp(30px,5vw,48px);line-height:1.15;margin:12px 0 16px;letter-spacing:-.02em}
+.lead{font-size:clamp(17px,2.2vw,20px);color:var(--muted);max-width:760px}
+h2{font-size:26px;margin:0 0 16px;letter-spacing:-.01em}
+section{padding:36px 0;border-top:1px solid var(--line)}
+.grid{display:grid;gap:16px;grid-template-columns:repeat(auto-fit,minmax(230px,1fr))}
+.card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:20px}
+.card h3{margin:0 0 8px;font-size:17px}
+.card p{margin:0;color:var(--muted);font-size:15px}
+table{width:100%;border-collapse:collapse;background:var(--card);border:1px solid var(--line);border-radius:12px;overflow:hidden;font-size:15px}
+th,td{text-align:left;padding:12px 14px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-size:13px;text-transform:uppercase;letter-spacing:.04em;color:var(--muted)}
+tr:last-child td{border-bottom:0}
+.table-wrap{overflow-x:auto}
+.note{background:var(--warn-bg);color:var(--warn);border-radius:12px;padding:16px 18px;font-size:15px}
+ul.limits{margin:0;padding-left:20px;color:var(--muted)}
+ul.limits li{margin:6px 0}
+.status{display:inline-block;background:var(--accent);color:var(--accent-ink);border-radius:999px;padding:4px 12px;font-size:13px;font-weight:700}
+a{color:var(--accent)}
+footer{padding:32px 0 48px;color:var(--muted);font-size:14px;border-top:1px solid var(--line)}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+  <div class="brand">çeper</div>
+  <h1>AI çalışmalarının izinsiz yayılmasını sınırlayan yerel kontrol aracı</h1>
+  <p class="lead">Çeper, bilgisayarda çalışan AI programlarını sınırlar, ev ya da ofis ağında kendini kopyalayan yazılımların izlerini erken görür ve müdahaleyi insan onayına bağlar. Her iddia ölçülmüş bir sonuca dayanır; ölçülmeyen her şey açıkça yazılıdır.</p>
+  <p><span class="status">Geliştirme sürümü 1.3 — kamuya açık indirme yok</span></p>
+</header>
+
+<section>
+  <h2>Neden</h2>
+  <p>Anthropic, 12 Ekim 2026'da yayımladığı araştırmada küçük AI modellerinin ucuz ve zayıf korunan cihazlara (ör. markasız Android TV kutuları) yayılıp kendini kopyalayabilmesinin “aylar uzakta olabileceğini” yazdı. Deneylerde giriş yolu kimlik doğrulamasız hata ayıklama portuydu (ADB); yayılım yavaştı ve ağda iz bırakıyordu. Araştırmanın önerdiği savunmalar ağ seviyesinde: trafikte anomali, tuzak cihazlar, karantina ve güvenli varsayılanlar. Çeper bu önerileri tek bir yerel araçta uygular. Kaynak: <a href="https://www.anthropic.com/research/self-replicating-ai" rel="noopener">Anthropic Frontier Red Team</a>.</p>
+</section>
+
+<section>
+  <h2>Ne yapar</h2>
+  <div class="grid">
+    <div class="card"><h3>Yalıtılmış çalıştırma</h3><p>AI programları Windows'un düşük bütünlük düzeyinde başlar: Çeper'in anahtarlarını okuyamaz, kayıtlarını değiştiremez, Çeper'i kapatamaz.</p></div>
+    <div class="card"><h3>Süreç ve kaynak sınırı</h3><p>Her çalışma bir süreç grubunda tutulur; süreç sayısı, bellek ve süre sınırlanır, durdurma işletim sistemi ölçümüyle doğrulanır.</p></div>
+    <div class="card"><h3>Ağ erken uyarısı</h3><p>Ağ kayıtlarında açık ADB taraması, cihazlar arası büyük aktarım, uzun bağlantı ve “erişim → yayılım” zinciri aranır.</p></div>
+    <div class="card"><h3>Tuzak cihaz</h3><p>Ağda açık ADB'li bir TV kutusu gibi görünür; bağlananın komutlarını kaydeder, hiçbir komutu çalıştırmaz, dosya içeriği saklamaz.</p></div>
+    <div class="card"><h3>İnsan onaylı karantina</h3><p>Android'de yerel VPN ile, ev ağında Linux geçidiyle süreli izolasyon. Otomatik müdahale yok.</p></div>
+    <div class="card"><h3>İmzalı kanıt</h3><p>Uyarılar, müdahaleler ve sonuçlar kurcalamaya karşı zincirlenmiş, imzalı bir kayıtta tutulur.</p></div>
+  </div>
+</section>
+
+<section>
+  <h2>Ölçülmüş sonuçlar</h2>
+  <div class="table-wrap"><table>
+    <thead><tr><th>Ne sınandı</th><th>Sonuç</th></tr></thead>
+    <tbody>
+      <tr><td>Uygulama ve güvenlik testleri</td><td>103 testin tamamı geçti</td></tr>
+      <tr><td>Yalıtılmış programın anahtar okuma, kayıt yazma, Çeper'i kapatma ve sistem aracılarıyla (WMI, Görev Zamanlayıcı) kaçma denemeleri</td><td>Hepsi reddedildi</td></tr>
+      <tr><td>Yerel model sunucusu (Ollama) yalıtılmış düzeyde</td><td>Çalıştı, yanıt üretti; model deposuna yazamadı</td></tr>
+      <tr><td>Sentetik yayılım zinciri ve meşru trafik (video, güncelleme, yedekleme)</td><td>Zincir bulundu; meşru trafikte 0 uyarı</td></tr>
+      <tr><td>Gerçek IoT trafiği (IoT-23 veri seti, 1 826 bağlantı, yaklaşık 1 gün)</td><td>0 yanlış alarm — küçük örneklem</td></tr>
+      <tr><td>Tuzağa gerçek ADB istemcisi ve 20 000 bozuk bağlantı</td><td>Doğru kayıt; çökme veya takılma yok</td></tr>
+      <tr><td>Android telefonda izolasyon (mobil veri, ağ değişimi, çökme)</td><td>Trafik engellendi; çökmede sızıntı olmadı (her zaman açık VPN ile)</td></tr>
+    </tbody>
+  </table></div>
+</section>
+
+<section>
+  <h2>Sınırlar</h2>
+  <div class="note">Çeper tam bir sanal alan veya antivirüs değildir ve bütün interneti korumaz. Aşağıdakiler henüz yapılmadı ya da ölçülmedi.</div>
+  <ul class="limits">
+    <li>Bağımsız insan güvenlik denetimi yapılmadı; incelemeler AI tarafından yapıldı.</li>
+    <li>Gerçek bir saldırgan veya kendini kopyalayan AI ile karşılaşma yaşanmadı; sonuçlar kontrollü denemelerden gelir.</li>
+    <li>Gerçek ev ağı trafiğinde yanlış alarm oranı henüz ölçülmedi.</li>
+    <li>Yalıtılmış program kullanıcının diğer dosyalarını okuyabilir ve internete çıkabilir.</li>
+    <li>Telefonda IPv6 engeli ölçülemedi; sınanan ağlar IPv6 sağlamıyordu.</li>
+    <li>Ağ uyarıları birer sinyaldir; tek başına saldırı ya da AI kanıtı değildir.</li>
+  </ul>
+</section>
+
+<footer>
+  <p>Çeper — theflowlounge.com · 2026. Bu sayfa bir ürün tanıtımıdır; güvenlik sertifikası değildir. Anthropic ile bir bağlantısı yoktur; araştırmaya yalnız kaynak olarak atıf yapılmıştır.</p>
+</footer>
+</div>
+</body>
+</html>
