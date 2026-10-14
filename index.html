@@ -156,7 +156,7 @@ footer p{margin:0 0 .6em;max-width:72em}
 <div class="wrap">
 
 <header class="mast">
-  <span><b>çeper</b> 1.4.0</span>
+  <span><b>çeper</b> 1.4.1</span>
   <span>Windows'ta yerel çalışır</span>
   <span>kamuya açık indirme yok</span>
   <span>theflowlounge.com</span>
@@ -285,11 +285,11 @@ footer p{margin:0 0 .6em;max-width:72em}
 <section class="sec" id="simdi">
   <h2>şu an ne çalışıyor</h2>
   <p class="sub">14 Ekim 2026, kendi bilgisayarımda; Çeper'in kendi panelinden okudum.</p>
-  <p class="tally">altıdan üçü çalışıyor (biri yarım), biri hazır, biri kapıda bekliyor, biri donanım bekliyor.</p>
+  <p class="tally">altıdan beşi çalışıyor (biri yarım), biri donanım bekliyor.</p>
   <ol class="now">
-    <li><span class="n" aria-hidden="true">1</span><b>kısıtlı alan</b><span class="st ready">hazır</span><p>Ollama için Low profil kurulu ve 14 Ekim'de bir kez çalıştı; sonuç aşağıda, Tablo 1'de. Sürekli açık değil. Günlük kullandığım Ollama hâlâ dışarıda.</p></li>
-    <li><span class="n" aria-hidden="true">2</span><b>süreç grubu</b><span class="st wait">bekliyor</span><p>Kapı kapalı, çalışan iş yok. Ollama denemesinden sonra kapıyı yeniden kapattım.</p></li>
-    <li><span class="n" aria-hidden="true">3</span><b>ağ erken uyarısı</b><span class="st half">yarım</span><p>Bu bilgisayarın bağlantı tablosu 2 saniyede bir okunuyor. Ağdaki diğer cihazların kendi aralarındaki trafiği görmek için Zeek sensörü lazım. Raspberry Pi planı hazır, donanım henüz yok.</p></li>
+    <li><span class="n" aria-hidden="true">1</span><b>kısıtlı alan</b><span class="st on">çalışıyor</span><p>Günlük kullandığım Ollama 14 Ekim'den beri Çeper'in içinde: Low düzeyde, ekran kartında, sürekli hizmet olarak. Çeviri yapan ses uygulamamı da ona bağladım.</p></li>
+    <li><span class="n" aria-hidden="true">2</span><b>süreç grubu</b><span class="st on">çalışıyor</span><p>Kapı açık. Ollama bu grubun içinde; bellek ve süreç sınırı geçerli, kendiliğinden kapanırsa yeniden başlıyor.</p></li>
+    <li><span class="n" aria-hidden="true">3</span><b>ağ erken uyarısı</b><span class="st half">yarım</span><p>Bu bilgisayarın bağlantı tablosu 2 saniyede bir okunuyor. Ağdaki diğer cihazların kendi aralarındaki trafiği görmek için Zeek sensörü lazım. Zeek kayıtlarını okuyacak klasör Çeper'de hazır; Raspberry Pi henüz yok.</p></li>
     <li><span class="n" aria-hidden="true">4</span><b>tuzak kutu</b><span class="st on">çalışıyor</span><p>Yerel ağda dinliyor ve yoklamaları da kaydediyor. Henüz kimse dokunmadı.</p></li>
     <li><span class="n" aria-hidden="true">5</span><b>karantina</b><span class="st no">yok</span><p>Ev ağında Linux geçidi kurulu değil; aynı Pi planı bunu da kapatıyor. Telefon uygulaması ayrı ve elle çalışıyor.</p></li>
     <li><span class="n" aria-hidden="true">6</span><b>imzalı kayıt</b><span class="st on">çalışıyor</span><p>Zincir geçerli; her gün imzalı bir kopya kendiliğinden yazılıyor.</p></li>
@@ -303,10 +303,11 @@ footer p{margin:0 0 .6em;max-width:72em}
     <table>
       <thead><tr><th scope="col">ne denedim</th><th scope="col">ne oldu</th><th scope="col">kayıt dosyası</th></tr></thead>
       <tbody>
-        <tr><td>Uygulama ve güvenlik testleri</td><td class="ne">114 testin 114'ü geçti</td><td class="dosya">tests-1.4.xml</td></tr>
+        <tr><td>Uygulama ve güvenlik testleri</td><td class="ne">125 testin 125'i geçti</td><td class="dosya">tests-1.4.1.xml</td></tr>
         <tr><td>Low düzeyden anahtarları ve veritabanını okuma, veri klasörüne yazma, Çeper'i ve başlatıcısını kapatma, WMI ile grup dışında süreç açma</td><td class="ne">6 denemenin 6'sı da reddedildi</td><td class="dosya">low-integrity.json</td></tr>
         <tr><td>Low düzeyden Görev Zamanlayıcı'ya görev kaydetme</td><td class="ne">Reddedildi, geride görev kalmadı</td><td class="dosya">low-task-register.json</td></tr>
         <tr><td>Ollama 0.35.1'i Çeper'in gerçek kurulumunda Low profille çalıştırma</td><td class="ne">9,4 sn'de açıldı ve 16 token üretti; model deposuna yazma denemesi reddedildi, durduğu doğrulandı (10/10)</td><td class="dosya">ollama-low-live.json</td></tr>
+        <tr><td>Günlük Ollama'yı Çeper'in içinde sürekli hizmet olarak çalıştırma (gemma4 ile çeviri)</td><td class="ne">Low düzeyde ve ekran kartında (8,95 GB VRAM); çeviri doğru geldi, ilk istek 134 sn, sonrakiler 0,2 sn</td><td class="dosya">ollama-gunluk.json</td></tr>
         <tr><td>Elle kurulmuş bir yayılım zinciri ve 4 meşru akış (video, güncelleme, yedekleme, DNS)</td><td class="ne">Zincirin 6 sinyalinin hepsi yakalandı; meşru akışlarda 0 uyarı</td><td class="dosya">benchmark.json</td></tr>
         <tr><td>IoT-23 veri setinden gerçek, zararsız IoT trafiği: 1 826 bağlantı, iki kayıt, toplam yaklaşık 27 saat</td><td class="ne">0 yanlış alarm <span class="hand">örneklem küçük, biliyorum</span></td><td class="dosya">iot23-benign-olcum.json</td></tr>
         <tr><td>Google'ın gerçek adb istemcisiyle tuzağa bağlanma (yerel döngüde)</td><td class="ne">İstemci gerçek cihaz sandı, dosya gönderdi; hiçbir komut çalışmadı</td><td class="dosya">decoy-adb-client.json</td></tr>
@@ -342,7 +343,7 @@ footer p{margin:0 0 .6em;max-width:72em}
 
 <footer>
   <p>Bu sayfa bir ürün tanıtımı; güvenlik sertifikası olarak kullanılamaz. Anthropic'le bir bağı yok, araştırmaları yalnız kaynak olarak anılıyor. Sayfada çerez ya da sayaç yok, dış sunucuya istek gitmez.</p>
-  <p>Son güncelleme 14 Ekim 2026 · Çeper 1.4.0 · yazı tipleri Anybody ve Caveat (SIL Open Font License) · theflowlounge.com</p>
+  <p>Son güncelleme 14 Ekim 2026 · Çeper 1.4.1 · yazı tipleri Anybody ve Caveat (SIL Open Font License) · theflowlounge.com</p>
 </footer>
 
 </div>
