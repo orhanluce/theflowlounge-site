@@ -156,7 +156,7 @@ footer p{margin:0 0 .6em;max-width:72em}
 <div class="wrap">
 
 <header class="mast">
-  <span><b>çeper</b> 1.4.1</span>
+  <span><b>çeper</b> 1.4.2</span>
   <span>Windows'ta yerel çalışır</span>
   <span>kamuya açık indirme yok</span>
   <span>theflowlounge.com</span>
@@ -285,26 +285,26 @@ footer p{margin:0 0 .6em;max-width:72em}
 
 <section class="sec" id="simdi">
   <h2>şu an ne çalışıyor</h2>
-  <p class="sub">14 Ekim 2026, kendi bilgisayarımda; Çeper'in kendi panelinden okudum.</p>
+  <p class="sub">18 Ekim 2026, kendi bilgisayarımda; Çeper'in kendi panelinden okudum.</p>
   <p class="tally">altıdan beşi çalışıyor (biri yarım), biri donanım bekliyor.</p>
   <ol class="now">
-    <li><span class="n" aria-hidden="true">1</span><b>kısıtlı alan</b><span class="st on">çalışıyor</span><p>14 Ekim sabahından beri Ollama'nın ikinci bir kopyası Çeper'in içinde: Low düzeyde, ekran kartında, Çeper açık kaldığı sürece kapanmıyor. Bilgisayar açılınca kendiliğinden başlayan asıl Ollama'm (tepsi uygulaması) hâlâ dışarıda; panel bunu da yazıyor. Ses uygulamamın LLM ayarını da içerideki kopyaya çevirdim. İçinden henüz denemedim.</p></li>
-    <li><span class="n" aria-hidden="true">2</span><b>süreç grubu</b><span class="st on">çalışıyor</span><p>Kapı açık. Ollama bu grubun içinde; bellek ve süreç sınırı geçerli, kendiliğinden kapanırsa yeniden başlıyor.</p></li>
-    <li><span class="n" aria-hidden="true">3</span><b>ağ erken uyarısı</b><span class="st half">yarım</span><p>Bu bilgisayarın bağlantı tablosu 2 saniyede bir okunuyor. Ağdaki diğer cihazların kendi aralarındaki trafiği görmek için Zeek sensörü lazım. Zeek kayıtlarını bir klasörden okuyan kısmı Çeper'e ekledim ve örnek kayıtlarla sınadım, klasörü henüz seçmedim. Kayıtları üretecek Raspberry Pi de, onları buraya taşıyacak kopyalama işi de yok. İzlenen cihaz listem şimdilik boş.</p></li>
+    <li><span class="n" aria-hidden="true">1</span><b>kısıtlı alan</b><span class="st on">çalışıyor</span><p>Ollama 0.40.6'nın günlük kopyası Low düzeyde çalışıyor ve 11500 adresinde yanıt veriyor. Dosya değişince eski profil başlatmayı reddetti; üretici imzasını kontrol edip onayla yeni profil oluşturdum. Tepsi Ollama'sı hâlâ dışarıda. Ses uygulamamın LLM ayarı içerideki kopyaya bağlı; uygulamanın içinden henüz denemedim. Ekran kartı ölçümü 14 Ekim'deki önceki Ollama sürümüne ait; yeni sürümde model üretimini yeniden ölçmedim.</p></li>
+    <li><span class="n" aria-hidden="true">2</span><b>süreç grubu</b><span class="st on">çalışıyor</span><p>Kapı açık. Yeni günlük Ollama profili süreç grubunda; bellek ve süreç sınırı geçerli, sürekli hizmet olarak ayarlı. Eski günlük profil devre dışı.</p></li>
+    <li><span class="n" aria-hidden="true">3</span><b>ağ erken uyarısı</b><span class="st half">yarım</span><p>Bu bilgisayarın bağlantı tablosu artık 0,25 saniyede bir okunuyor. Windows'un başarısız bağlantı sayısı 2 saniyede en az 60 artarsa ek uyarı açılıyor; bu sayaç hedef adresi bilmiyor. Ağdaki diğer cihazların kendi aralarındaki trafiği görmek için Zeek sensörü lazım. Zeek klasörü seçilmedi; Raspberry Pi ve kayıtları taşıyacak kopyalama işi de yok. İzlenen cihaz listem şimdilik boş.</p></li>
     <li><span class="n" aria-hidden="true">4</span><b>tuzak kutu</b><span class="st on">çalışıyor</span><p>Yerel ağda dinliyor ve yoklamaları da kaydediyor. Henüz kimse dokunmadı.</p></li>
     <li><span class="n" aria-hidden="true">5</span><b>karantina</b><span class="st no">yok</span><p>Ev ağında Linux geçidi kurulu değil; aynı Pi planı bunu da kapatıyor. Telefon uygulaması ayrı ve elle çalışıyor.</p></li>
-    <li><span class="n" aria-hidden="true">6</span><b>imzalı kayıt</b><span class="st on">çalışıyor</span><p>Zincir geçerli. İlk imzalı günlük kopya 14 Ekim 00.07'de kendiliğinden yazıldı; ikincisini 15 Ekim gece yarısından hemen sonra bekliyorum.</p></li>
+    <li><span class="n" aria-hidden="true">6</span><b>imzalı kayıt</b><span class="st on">çalışıyor</span><p>Zincir geçerli. 14, 15, 16, 17 ve 18 Ekim'in günlük kopyaları yazıldı; beşinin de imzası ve zinciri doğrulandı. Önceki kopyalar mevcut zincirle tutarlı.</p></li>
   </ol>
 </section>
 
 <section class="sec log" id="olcum">
   <h2>tablo 1: ölçtüklerim</h2>
-  <p class="sub">Hepsi 13 ve 14 Ekim 2026'da, kendi Windows 11 bilgisayarımda ve bir Samsung telefonda yapıldı. Satırlar 1.3.0 ile 1.4.1 arasındaki sürümlerde ölçüldü. Tuzak denemeleri ve gözcünün tarama ölçümü 1.4.1'de; gözcüyle tuzağın birlikte denendiği satır 1.4.0'da.</p>
+  <p class="sub">13–18 Ekim 2026, kendi Windows 11 bilgisayarımda ve bir Samsung telefonda. Satırlar 1.3.0 ile 1.4.2 arasındaki sürümlerde ölçüldü. Gözcünün son tarama ölçümü 1.4.2'de; tuzak denemeleri 1.4.1'de, gözcüyle tuzağın birlikte denendiği satır 1.4.0'da.</p>
   <div class="book">
     <table>
       <thead><tr><th scope="col">ne denedim</th><th scope="col">ne oldu</th><th scope="col">kayıt dosyası</th></tr></thead>
       <tbody>
-        <tr><td>Uygulama ve güvenlik testleri</td><td class="ne">125 testin 125'i geçti</td><td class="dosya">tests-1.4.1.xml</td></tr>
+        <tr><td>Uygulama ve güvenlik testleri (1.4.2)</td><td class="ne">129 testin 129'u hem geliştirme kopyasında hem kurulu kodda geçti. Ayrı geçici kurulumda 11 arayüz akışı da geçti</td><td class="dosya">tests-1.4.2-live-20261018.xml; ui/checks.json</td></tr>
         <tr><td>Low düzeyden anahtarları ve veritabanını okuma, veri klasörüne yazma, Çeper'i ve başlatıcısını kapatma, WMI ile grup dışında süreç açma</td><td class="ne">6 denemenin 6'sı da reddedildi</td><td class="dosya">low-integrity.json</td></tr>
         <tr><td>Low düzeyden Görev Zamanlayıcı'ya görev kaydetme</td><td class="ne">Reddedildi, geride görev kalmadı</td><td class="dosya">low-task-register.json</td></tr>
         <tr><td>Ollama 0.35.1'i Çeper'in gerçek kurulumunda Low profille çalıştırma</td><td class="ne">9,4 sn'de açıldı ve 16 token üretti; model deposuna yazma denemesi reddedildi, durduğu doğrulandı (10/10)</td><td class="dosya">ollama-low-live.json</td></tr>
@@ -314,8 +314,10 @@ footer p{margin:0 0 .6em;max-width:72em}
         <tr><td>Google'ın gerçek adb istemcisiyle tuzağa bağlanma (yerel döngüde, 1.4.1)</td><td class="ne">İstemci tuzağı cihaz olarak tanıdı ve dosya gönderdi; hiçbir komut çalışmadı. Sonuna yorum eklenmiş bir komuta da cihaz gibi cevap verdi (7/7)</td><td class="dosya">decoy-adb-client-1.4.1.json</td></tr>
         <tr><td>Tuzağa 5 000 bozuk bağlantı denemesi (1.4.1)</td><td class="ne">Hepsi tuzağa ulaştı, 698'i ADB konuşmadan kapanan yoklamaydı. Çökme ya da takılma yok, deneme süreci 9,9 MB büyüdü</td><td class="dosya">decoy-fuzz-1.4.1.json</td></tr>
         <tr><td>Yerel bağlantı gözcüsü ve tuzak, bilgisayarın kendi ağ adresinde: tuzağa hiç veri göndermeden 5 saniye bağlanma</td><td class="ne">Gözcü bağlantıyı süreç adıyla kaydetti, tuzak yoklamayı kaydedip uyarı açtı, imzalı kopyanın imzası doğrulandı (7/7)</td><td class="dosya">local-watcher.json</td></tr>
-        <tr><td>Gözcüye gerçek bağlantı denemeleri. Canlı kayda düşmesin diye Çeper'in bir kopyasında yaptım ve kopyada ADB portunu 5556'ya çevirdim; her deneme grubu kendi boş kurulumunda</td><td class="ne">Yanıt vermeyen 5 adrese aynı anda bağlanmayı gördü (Windows her denemeyi 21 saniye açık tuttu) ve tarama uyarısı açtı. 0,3 saniyede vazgeçen sıralı taramada 40 adresin 8, 1 ve 8'ini gördü (uyarı üç denemenin ikisinde açıldı), 120 adresin 9'unu gördü ve uyarı açtı. 40 adrese aynı anda yapılıp 0,3 saniyede biten denemeyi üç tekrarda da hiç görmedi</td><td class="dosya">watcher-scan.json</td></tr>
-        <tr><td>Aynı yöntemle, bilgisayarın kendi adresine kısa bağlantılar</td><td class="ne">Reddedilen 5 denemenin 5'ini gördü; Windows her reddi 2 saniye kadar bekletiyor. 0,1 saniyelik 20 bağlantının hepsini gördü, çünkü bağlantıyı bu bilgisayar düzgün kapatınca kaydı tabloda bir süre kalıyor. RST ile kesilen 20 bağlantının hiçbirini görmedi</td><td class="dosya">watcher-scan.json</td></tr>
+        <tr><td>Gözcüye gerçek bağlantı denemeleri (1.4.2). Kopyada ADB portu 5556; her deneme grubu kendi boş kurulumunda</td><td class="ne">Yanıtsız 5 adresin hepsini gördü. 0,3 saniyelik sıralı taramada 40 adresin üç koşuda 38, 39 ve 40'ını, 120 adresin 118'ini gördü. 40 adrese aynı anda yapılan 0,3 saniyelik denemede üç kez de 40/40. Bu taramaların hepsinde ADB tarama uyarısı açıldı. 80 adreslik paralel denemede ayrıca başarısız bağlantı sayacı uyardı</td><td class="dosya">watcher-scan-1.4.2-20261018.json</td></tr>
+        <tr><td>Aynı yöntemle, bilgisayarın kendi adresine kısa bağlantılar</td><td class="ne">Reddedilen 5 denemenin 5'ini, düzgün kapanan 0,1 saniyelik 20 bağlantının hepsini gördü. RST ile kesilen 20 bağlantının 8'ini gördü, 12'sini kaçırdı</td><td class="dosya">watcher-scan-1.4.2-20261018.json</td></tr>
+        <tr><td>Windows başarısız bağlantı sayacında 8 saatlik gece gözlemi</td><td class="ne">2 saniyelik pencerede en yüksek artış 45. Aday eşik 30 bu yüzden 60'a yükseltildi. Tek gece, gelecekte yanlış alarm olmayacağını göstermez; 40 denemelik patlama ek sayaç uyarısı açmayabilir</td><td class="dosya">sayac-gurultu-gece.json</td></tr>
+        <tr><td>24 saat hizmet yükü (1.4.0'dan 1.4.1'e geçişi içeriyor)</td><td class="ne">1 440 örnek: tek çekirdeğin ortalama %1,007'si; bellek en çok 76 MB. İki süreç kümesi değişimi ve hizmetin bulunamadığı bir örnek var. Bu ölçüm 1.4.2'nin yükü değil</td><td class="dosya">hizmet-yuku.json</td></tr>
         <tr><td>Samsung telefon, Android 15: mobil veri, Wi-Fi'a geçiş, yerel ağ; "her zaman açık VPN" ve "VPN'siz bağlantıları engelle" açıkken zorla kapatma</td><td class="ne">IPv4 trafiği kesildi; zorla kapatmada sızıntı olmadı</td><td class="dosya">android-device-1.3.json, android-device.json</td></tr>
       </tbody>
     </table>
@@ -334,8 +336,9 @@ footer p{margin:0 0 .6em;max-width:72em}
     <li>Çeper yalnız kendi içinden başlattığın programları kısıtlar. Dışarıda açılmış bir model programını adından tanırsa panelde gösterir ama içeri almaz, durdurmaz. Kapı kapalıyken dışarıdan açtığım zararsız bir deneme süreci de çalışmayı sürdürdü. Benim bilgisayarımda Ollama'nın tepsi uygulaması hâlâ dışarıda.</li>
     <li>Çeper bilgisayar açılınca kendiliğinden başlamıyor. Ben elle başlatana kadar tuzak dinlemiyor. İçerideki Ollama da, günlük imzalı kopya da o zamana kadar bekliyor.</li>
     <li>Gerçek bir ev ağında yanlış alarm oranını henüz ölçmedim.</li>
-    <li>Gözcü yalnız bu bilgisayarın bağlantılarını görür ve aktarılan bayt sayısını bilmez. Tabloyu 2 saniyede bir okuduğu için çok kısa denemeleri kaçırıyor: aynı anda yapılıp 0,3 saniyede biten bir taramayı hiç görmedi, RST ile kesilen 0,1 saniyelik 20 bağlantının da hiçbirini görmedi. Gerçek bir ev ağında, 5555 portunda ve ham paketle (SYN) taramayı ölçmedim. Yerel ağdaki boş adreslere giden, başka bir cihazın reddettiği ya da önce kapattığı bağlantıları da denemedim. Ağdaki diğer cihazlar için Zeek sensörü gerekiyor, henüz yok.</li>
+    <li>Gözcü yalnız bu bilgisayarın bağlantılarını görür ve aktarılan bayt sayısını bilmez. Tabloyu 0,25 saniyede bir okuyor; iki okuma arasında biten denemeler hâlâ kaçabilir. Son ölçümde RST ile kesilen 0,1 saniyelik 20 bağlantının 12'sini kaçırdı. Gerçek ev ağında, 5555 portunda ve ham paketle (SYN) taramayı ölçmedim. Başka bir cihazın reddettiği ya da önce kapattığı bağlantılar da denenmedi. Diğer cihazlar arası trafik için Zeek sensörü gerekiyor, henüz yok.</li>
     <li>Kısıtlı alandaki program senin diğer dosyalarını okuyabilir. Ağa çıkması da kısıtlanmıyor: internete de, ev ağındaki diğer cihazlara da bağlanabilir.</li>
+    <li>Cüzdan, ödeme veya sözleşme işlemi için hesap ve harcama onayı denetimi yok. Çeper bugün bir ajanın izinsiz kripto işlemini engellediği iddiasında bulunmuyor.</li>
     <li>Çeper'in anahtarları yalnız Low düzeydeki programlara kapalı. Normal yetkiyle çalışan her program onları okuyabilir, Çeper'i kapatabilir ve kaydı zinciri koparmadan baştan yazabilir. Çeper dışında açılmış program da, Çeper'den Low ayarı kapatılarak başlatılan da buna dahil.</li>
     <li>Kaydın sonundan silinen satırları zincir tek başına yakalamaz; önceki bir imzalı kopyayla karşılaştırmak gerekir, bunu da Çeper kendiliğinden yapmıyor. İmzalı kopyalar aynı bilgisayarda duruyor.</li>
     <li>Tuzağa ev ağındaki başka bir cihazdan bağlanmayı henüz denemedim; adb denemesi aynı bilgisayarın içindeydi.</li>
@@ -349,7 +352,7 @@ footer p{margin:0 0 .6em;max-width:72em}
 
 <footer>
   <p>Bu sayfa bir ürün tanıtımı; güvenlik sertifikası olarak kullanılamaz. Anthropic'le bir bağı yok, araştırmaları yalnız kaynak olarak anılıyor. Sayfada çerez ya da sayaç yok, dış sunucuya istek gitmez.</p>
-  <p>Son güncelleme 14 Ekim 2026 · Çeper 1.4.1 · yazı tipleri Anybody ve Caveat (SIL Open Font License) · theflowlounge.com</p>
+  <p>Son güncelleme 18 Ekim 2026 · Çeper 1.4.2 · yazı tipleri Anybody ve Caveat (SIL Open Font License) · theflowlounge.com</p>
 </footer>
 
 </div>
